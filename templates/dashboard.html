@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard - SynergySphere</title>
+  <link href="{% static 'css/dashboard.css' %}" rel="stylesheet" />
+  <style>
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+      font-family: 'Open Sans', sans-serif;
+      color: #2c3e50;
+    }
+    h1 {
+      font-weight: 600;
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+    }
+    .dashboard-flex {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    #add-project-form {
+      background: white;
+      padding: 20px 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      flex: 1 1 400px;
+      max-width: 450px;
+    }
+    #add-project-form h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #34495e;
+    }
+    #add-project-form label {
+      display: block;
+      margin: 12px 0 6px 0;
+      font-weight: 600;
+    }
+    #add-project-form input[type="text"],
+    #add-project-form textarea,
+    #add-project-form input[type="date"] {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 15px;
+      border: 1px solid #bdc3c7;
+      border-radius: 6px;
+      font-size: 1em;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+    #add-project-form input[type="text"]:focus,
+    #add-project-form textarea:focus,
+    #add-project-form input[type="date"]:focus {
+      border-color: #2980b9;
+      outline: none;
+      box-shadow: 0 0 5px rgba(41, 128, 185, 0.7);
+    }
+    #add-project-form button {
+      background-color: #2980b9;
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+    #add-project-form button:hover {
+      background-color: #21618c;
+    }
+    #pending-projects-section {
+      flex: 2 1 500px;
+      background: white;
+      padding: 20px 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow-x: auto;
+    }
+    #pending-projects-section h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #34495e;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      text-align: left;
+      padding: 14px 18px;
+      border-bottom: 1px solid #ddd;
+      vertical-align: middle;
+    }
+    th {
+      background-color: #2980b9;
+      color: white;
+      font-weight: 600;
+    }
+    tr:hover {
+      background-color: #f1f6fb;
+    }
+    .empty-message {
+      text-align: center;
+      padding: 30px 0;
+      color: #7f8c8d;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dashboard</h1>
+    <div class="dashboard-flex">
+      <section id="add-project-form">
+      {% if user.is_superuser %}
+        <h3>Add New Project</h3>
+        <form method="post" action="{% url 'add_project' %}">
+          {% csrf_token %}
+          <label for="id_name">Project Name</label>
+          <input type="text" id="id_name" name="name" placeholder="Enter project name" required />
+          
+          <label for="id_description">Description</label>
+          <textarea id="id_description" name="description" placeholder="Project description" rows="4"></textarea>
+          
+          <label for="id_deadline">Deadline</label>
+          <input type="date" id="id_deadline" name="deadline" />
+{% comment %}           
+          <label for="id_Project_detail">Project Details</label>
+          <input type="text" id="id_Project_detail" name="Project_detail" placeholder="Enter project details" required /> {% endcomment %}
+
+          <button type="submit">Add Project</button>
+        </form>
+      </section>
+      {% endif %}
+      <section id="pending-projects-section">
+      
+        <h3>Pending Projects</h3>
+        {% if projects %}
+          <table>
+            <thead>
+              <tr>
+                <th>Project Name</th>
+                <th>Description</th>
+                <th>Deadline</th>
+                <th>Project Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for project in projects %}
+                <tr>
+                  <td>{{ project.name }}</td>
+                  <td>{{ project.description }}</td>
+                  <td>{% if project.deadline %}{{ project.deadline|date:"Y-m-d" }}{% else %}-{% endif %}</td>
+                  <td><a href="{% url 'project_detail' project.id %}">View Details</a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p class="empty-message">No projects yet</p>
+        {% endif %}
+      </section>
+    </div>
+  </div>
+</body>
+</html>

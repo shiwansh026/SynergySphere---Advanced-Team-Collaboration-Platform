@@ -1,0 +1,97 @@
+/* Apply to entire page */
+/* Add to your auth.css (replacing the existing body/container styles) */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f7f9fb;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;  /* ensures full viewport height */
+  padding: 10px;      /* some padding for smaller devices */
+  box-sizing: border-box;
+}
+
+.container {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;  /* max width for bigger screens */
+  box-sizing: border-box;
+  text-align: center;  /* center form heading */
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #34495e;
+}
+
+/* rest of your form styles (inputs, buttons, etc.) remain */
+
+/* Form label styling */
+.form-label {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+/* Inputs full width */
+input[type="text"], input[type="email"], input[type="password"] {
+  width: 100%;
+  padding: 10px 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Button styling, full width */
+button {
+  background-color: #3498db;
+  border: none;
+  color: white;
+  padding: 12px 10px;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Alert styling */
+.alert {
+  color: #c0392b;
+  background-color: #fceae9;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+/* Paragraph centered text */
+p {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.95em;
+}
+
+/* Links in paragraph */
+p a {
+  color: #2980b9;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}

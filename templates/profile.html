@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile - SynergySphere</title>
+  <link href="{% static 'css/profile.css' %}" rel="stylesheet" />
+  <script src="{% static 'js/profile.js' %}"></script>
+</head>
+<body class="container mt-5">
+  <h2>Your Profile</h2>
+  <p><strong>Username:</strong> {{ profile.user.username }}</p>
+  <p><strong>Email:</strong> {{ profile.user.email }}</p>
+  <a href="{% url 'dashboard' %}" class="btn btn-primary mt-3">Back to Dashboard</a>
+</body>
+</html>

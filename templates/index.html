@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SynergySphere</title>
+  <link href="{% static 'css/index.css' %}" rel="stylesheet" />   
+  <script src="{% static 'js/index.js' %}"></script>
+</head>
+<body class="container mt-5">
+  <h1>Welcome to SynergySphere</h1>
+  <p>Your intelligent team collaboration platform.</p>
+
+  <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+  <a href="{% url 'signup' %}" class="btn btn-secondary">Sign Up</a>
+</body>
+</html>

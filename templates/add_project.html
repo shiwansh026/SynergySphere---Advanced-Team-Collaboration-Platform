@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add Project - SynergySphere</title>
+  <link href="{% static 'css/dashboard.css' %}" rel="stylesheet" />
+  <style>
+    /* Additional style for the add project form */
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      background: white;
+      padding: 25px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px 0;
+      font-weight: 600;
+      color: #34495e;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 5px;
+      border: 1px solid #bdc3c7;
+      border-radius: 6px;
+      font-size: 1em;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus, textarea:focus {
+      border-color: #2980b9;
+      outline: none;
+      box-shadow: 0 0 5px rgba(41, 128, 185, 0.7);
+    }
+    input[type="color"] {
+      width: 50px;
+      height: 34px;
+      padding: 0;
+      border: none;
+      cursor: pointer;
+      background: none;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #2980b9;
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #21618c;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Add New Project</h1>
+    <form method="post">
+      {% csrf_token %}
+      
+      <label for="id_name">Project Name</label>
+      <input type="text" id="id_name" name="name" placeholder="Enter project name" required />
+
+      <label for="id_description">Description</label>
+      <textarea id="id_description" name="description" placeholder="Enter project description" rows="4"></textarea>
+
+      <label for="id_deadline">Deadline</label>
+      <input type="date" id="id_deadline" name="deadline" />
+
+      <button type="submit">Save Project</button>
+    </form>
+
+    <p><a href="{% url 'dashboard' %}">Back to Dashboard</a></p>
+  </div>
+</body>
+</html>
